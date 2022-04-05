@@ -1,1 +1,1 @@
-web: node src/myfirstmath2.js
+web: node src/app/server.js
