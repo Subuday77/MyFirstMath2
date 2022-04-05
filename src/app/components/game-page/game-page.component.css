@@ -1,0 +1,111 @@
+.head {
+    /* text-align: center; */
+    font-family: 'Rubik Moonrocks';
+    font-size: 80px;
+    color: rgb(255, 251, 0);
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    cursor: context-menu;
+}
+
+thead {
+    text-align: center;
+}
+
+tbody {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    /* text-align: center; */
+}
+
+table {
+    position: relative;
+    /* top: 100px; */
+    /* left: 500px; */
+    width: 450px;
+    /* border: 1px solid #5b6269b9; */
+    border-radius: 5px;
+    padding-bottom: 40px;
+    /* margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height: 100px; */
+}
+
+th {
+    font-size: larger;
+    /* font-family: 'Nixie One'; */
+    text-align: center;
+    word-break: keep-all;
+    color: rgb(0, 0, 0);
+    background-color: #cfb5b5;
+    height: 40px;
+    cursor: default;
+}
+
+th,
+td {
+    /* border: none; */
+    /* max-width: 220px; */
+    min-width: auto;
+    word-break: break-word;
+}
+
+td {
+    background-color: blanchedalmond;
+    /* border: 1px solid #5b6269b9; */
+    border-radius: 2px;
+    text-align: center;
+}
+
+.back:active,
+.back.answer:active {
+    border: 2px solid rgba(255, 255, 255);
+    box-shadow: none;
+    background-color: #28485a;
+}
+
+.back {
+    position: absolute;
+    width: 350px;
+    padding: 20px;
+    font-size: 200%;
+    border-radius: 5px;
+    background-color: #85cef8;
+    border: 1px solid rgba(255, 255, 255);
+    z-index: 200;
+}
+
+.back:hover,
+.back.answer:hover {
+    box-shadow: 0 5px 15px white;
+    cursor: pointer;
+}
+
+.back.answer {
+    background-color: darkgreen;
+    color: white
+}
+
+.result {
+    height: 35px;
+    position: absolute;
+    top: 130px;
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    z-index: 200;
+    left: 250px;
+    top: 52px;
+    width: 60px;
+    text-align: center;
+}
+
+.material-icons-round.yellow {
+    color: yellow;
+    font-size: 80px;
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+}

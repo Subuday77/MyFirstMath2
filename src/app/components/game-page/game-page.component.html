@@ -1,0 +1,73 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evo Tables List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Moonrocks&effect=fire-animation|3d|outline">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Moonrocks|Noto+Sans|Roboto+Mono|Kameron">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="animate__animated animate__fadeInDown head unselectable">Привет, {{username}}!</h1>
+    <div style="position: absolute; top:10px; left:10px; ">
+        <button class="back answer" style="width: 100px; padding: 2px; font-size: 15px;" (click)="out()"><span class="material-icons-round">
+            directions_run
+            </span>Выход</button>
+    </div>
+    <div>
+        <h1>Выбери действия</h1>
+        <table class="unselectable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th style="width: 100px;">Действие</th>
+                    <th>Очков за правильный ответ</th>
+                    <th>Штраф за неправильный ответ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let action of actions">
+                    <td><input type="checkbox" class="switch" [(ngModel)]="action.isSelected"></td>
+                    <td>{{action.name}}</td>
+                    <td>{{action.bonus}}</td>
+                    <td>{{action.fee}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="checkbox" class="switch" [(ngModel)]="allowNegative">
+    <a>Разрешить отрицательные числа</a>
+    <h1>Ты набрал {{points}} {{pointsWord}}</h1>
+    <h1>Правильных ответов: {{answersCounter}} из {{commonCounter}}</h1>
+    <h1>Дай {{upToStar - answersCounter}} правильны{{answersWord}} и получи звезду!</h1>
+    <div style="position: absolute; top:230px; left:500px; width: 350px">
+        <h1 style="font-size: 400%;" *ngIf="!isAnswerGiven">{{taskToDo}}</h1>
+        <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" *ngIf="isAnswerGiven">{{taskToDo}} {{correctResult}}</h1>
+        <input *ngIf="taskToDo.length && !isAnswerGiven" type="text" class="result" [ngStyle]="placeAnswer()" [(ngModel)]="result">
+    </div>
+    <div style="position: absolute; top:347px; left:500px">
+        <button *ngIf="!taskToDo.length" class="back" (click)="generateTask()">Показать задание</button>
+        <button *ngIf="taskToDo.length" class="back" (click)="generateTask()">Новое задание</button>
+        <button *ngIf="taskToDo.length && !isAnswerGiven" class="back" (click)="generateTask()">Новое задание <a style = "font-size: 50%;">(-2 очка)</a></button>
+        <button *ngIf="taskToDo.length && !isAnswerGiven" class="back answer" style="left: 370px; width: 150px;" (click)="checkAnswer()">Ответ</button>
+    </div>
+    <div>
+        <table style="width: fit-content;">
+            <tbody>
+                <tr>
+                    <td *ngFor="let star of starsArray" style="background-color: unset; width: 0px; text-align: left;"><span class="animate__animated animate__backInDown unselectable material-icons-round yellow">
+                        star
+                        </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
