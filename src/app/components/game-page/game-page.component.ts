@@ -39,6 +39,7 @@ export class GamePageComponent implements OnInit {
   ngOnInit(): void {
     if (this.service.username != undefined && this.service.username != "" && this.service.username != null) {
       this.username = this.service.username;
+      this.service.username = undefined;
     } else {
       this.router.navigate(['']);
     }
