@@ -260,6 +260,8 @@ export class GamePageComponent implements OnInit {
   }
 
   placeAnswer() {
+    var input = document.getElementById('inputAnswer');
+    input.focus();
     var temp = {};
     if (this.taskToDo.length === 8) {
       temp = { 'left': '230px' };
@@ -281,7 +283,7 @@ export class GamePageComponent implements OnInit {
   answerBackground() {
     return this.isAnswerCorrect === 0 ? { 'background-color': 'green' } : this.isAnswerCorrect === 1 ? { 'background-color': 'red' } : {};
   }
-  
+
   out() {
     Swal.fire({
       title: 'Уверен?',

@@ -69,7 +69,7 @@
         <h1 style="font-size: 400%;" class="animate__animated animate__fadeInDown" *ngIf="!isAnswerGiven">{{taskToDo}}</h1>
         <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" class="animate__animated animate__shakeX" *ngIf="isAnswerGiven && isAnswerCorrect">{{taskToDo}} {{correctResult}}</h1>
         <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" class="animate__animated animate__flipInX" *ngIf="isAnswerGiven && !isAnswerCorrect">{{taskToDo}} {{correctResult}}</h1>
-        <input *ngIf="taskToDo.length && !isAnswerGiven" type="text" class="result animate__animated animate__fadeIn" [ngStyle]="placeAnswer()" [(ngModel)]="result">
+        <input *ngIf="taskToDo.length && !isAnswerGiven" type="text" class="result animate__animated animate__fadeIn" id="inputAnswer" [ngStyle]="placeAnswer()" [(ngModel)]="result">
     </div>
     <div style="position: absolute; top:333px; left:500px">
         <button *ngIf="!taskToDo.length" class="back" (click)="generateTask()">Показать задание</button>
