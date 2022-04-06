@@ -1,3 +1,8 @@
+h1 {
+    font-size: 25px;
+    padding: 0px;
+}
+
 .head {
     /* text-align: center; */
     font-family: 'Rubik Moonrocks';
@@ -38,7 +43,7 @@ th {
     text-align: center;
     word-break: keep-all;
     color: rgb(0, 0, 0);
-    background-color: #cfb5b5;
+    background-color: #7cee8f;
     height: 40px;
     cursor: default;
 }

@@ -22,6 +22,17 @@
             directions_run
             </span>Выход</button>
     </div>
+    <div style="position: absolute; top: 130px; left:0px;">
+        <table style="width: fit-content;">
+            <tbody>
+                <tr>
+                    <td *ngFor="let star of starsArray" style="background-color: unset; width: 0px; text-align: left;"><span class="animate__animated animate__backInRight unselectable material-icons-round yellow">
+                        star
+                        </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div>
         <h1>Выбери действия</h1>
         <table class="unselectable">
@@ -43,23 +54,24 @@
             </tbody>
         </table>
     </div>
-    <input type="checkbox" class="switch" [(ngModel)]="allowNegative">
-    <a>Разрешить отрицательные числа</a>
+    <input type="checkbox" class="switch" style="width: 20px; height: 20px;" [(ngModel)]="allowNegative">
+    <a style="font-size: 20px;">Разрешить отрицательные числа</a>
     <h1>Ты набрал {{points}} {{pointsWord}}</h1>
     <h1>Правильных ответов: {{answersCounter}} из {{commonCounter}}</h1>
     <h1>Дай {{upToStar - answersCounter}} правильны{{answersWord}} и получи звезду!</h1>
-    <div style="position: absolute; top:230px; left:500px; width: 350px">
-        <h1 style="font-size: 400%;" *ngIf="!isAnswerGiven">{{taskToDo}}</h1>
-        <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" *ngIf="isAnswerGiven">{{taskToDo}} {{correctResult}}</h1>
-        <input *ngIf="taskToDo.length && !isAnswerGiven" type="text" class="result" [ngStyle]="placeAnswer()" [(ngModel)]="result">
+    <div style="position: absolute; top:205px; left:500px; width: 350px">
+        <h1 style="font-size: 400%;" class="animate__animated animate__fadeInDown" *ngIf="!isAnswerGiven">{{taskToDo}}</h1>
+        <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" class="animate__animated animate__shakeX" *ngIf="isAnswerGiven && isAnswerCorrect">{{taskToDo}} {{correctResult}}</h1>
+        <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" class="animate__animated animate__flipInX" *ngIf="isAnswerGiven && !isAnswerCorrect">{{taskToDo}} {{correctResult}}</h1>
+        <input *ngIf="taskToDo.length && !isAnswerGiven" type="text" class="result animate__animated animate__fadeIn" [ngStyle]="placeAnswer()" [(ngModel)]="result">
     </div>
-    <div style="position: absolute; top:347px; left:500px">
+    <div style="position: absolute; top:333px; left:500px">
         <button *ngIf="!taskToDo.length" class="back" (click)="generateTask()">Показать задание</button>
         <button *ngIf="taskToDo.length" class="back" (click)="generateTask()">Новое задание</button>
         <button *ngIf="taskToDo.length && !isAnswerGiven" class="back" (click)="generateTask()">Новое задание <a style = "font-size: 50%;">(-2 очка)</a></button>
         <button *ngIf="taskToDo.length && !isAnswerGiven" class="back answer" style="left: 370px; width: 150px;" (click)="checkAnswer()">Ответ</button>
     </div>
-    <div>
+    <!-- <div>
         <table style="width: fit-content;">
             <tbody>
                 <tr>
@@ -69,5 +81,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
 </body>
