@@ -118,8 +118,8 @@ export class GamePageComponent implements OnInit {
   }
 
   buildExpression(action: Action) {
-    var num1 = Math.random() * action.maxFirstNum | 0;
-    var num2 = Math.random() * action.maxSecondNum | 0;
+    var num1 = Math.random() * (action.maxFirstNum - 2 + 1) + 2 | 0;
+    var num2 = Math.random() * (action.maxSecondNum - 2 + 1) + 2 | 0;
     var actionSign = action.sign;
     if (action.sign === "*") {
       actionSign = "×"
@@ -128,8 +128,8 @@ export class GamePageComponent implements OnInit {
       actionSign = "÷"
     }
     while (!this.checkExpression(num1, num2, action.sign)) {
-      var num1 = Math.random() * action.maxFirstNum | 0;
-      var num2 = Math.random() * action.maxSecondNum | 0;
+      var num1 = Math.random() * (action.maxFirstNum - 2 + 1) + 2 | 0;
+      var num2 = Math.random() * (action.maxSecondNum - 2 + 1) + 2 | 0;
     }
     var expressionString = num1.toString() + " " + actionSign + " " + num2.toString() + " ="
     this.correctResult = eval(num1 + action.sign + num2);
@@ -149,6 +149,9 @@ export class GamePageComponent implements OnInit {
           return false;
         }
         if (num1 / num2 != Math.floor(num1 / num2)) {
+          return false;
+        }
+        if (num1 === num2) {
           return false;
         }
         return true;
@@ -208,7 +211,7 @@ export class GamePageComponent implements OnInit {
       if (actionSign === action.sign) {
         if (Number.parseInt(this.result) === this.correctResult) {
           this.points = this.points + action.bonus;
-          this.answersCounter++;          
+          this.answersCounter++;
           if (this.upToStar === this.answersCounter) {
             this.starsArray.push("star");
           }
@@ -308,7 +311,7 @@ export class GamePageComponent implements OnInit {
       hideClass: {
         popup: 'animate__animated animate__rollOut'
       }
-    }).then(async (result)=>{
+    }).then(async (result) => {
       if (result.isConfirmed) {
         await this.delay(1000);
         this.navigate();
