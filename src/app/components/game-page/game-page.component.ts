@@ -263,11 +263,24 @@ export class GamePageComponent implements OnInit {
     var input = document.getElementById('inputAnswer');
     input.focus();
     var temp = {};
-    if (this.taskToDo.length === 8) {
-      temp = { 'left': '230px' };
-    }
-    if (this.taskToDo.length === 7) {
-      temp = { 'left': '200px' };
+    switch (this.taskToDo.length) {
+      case 7:
+        temp = { 'left': '200px' };
+        break;
+      case 8:
+        temp = { 'left': '230px' };
+        break;
+      case 9:
+        temp = { 'left': '260px' };
+        break;
+      case 10:
+        temp = { 'left': '290px' };
+        break;
+      case 11:
+        temp = { 'left': '320px' };
+        break;
+      default:
+        break;
     }
     return temp;
   }
