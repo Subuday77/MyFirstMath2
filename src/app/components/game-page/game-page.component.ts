@@ -179,7 +179,8 @@ export class GamePageComponent implements OnInit {
         title: "Пожалуйста, дай ответ!",
         confirmButtonColor: "#4F7A8C",
         icon: 'warning',
-        confirmButtonText: 'OK'
+        confirmButtonText: 'OK',
+        allowEnterKey:false
       });
       this.clearResult();
       return false;
@@ -189,7 +190,8 @@ export class GamePageComponent implements OnInit {
         title: "В ответе используй только цифры!",
         confirmButtonColor: "#4F7A8C",
         icon: 'warning',
-        confirmButtonText: 'OK'
+        confirmButtonText: 'OK',
+        allowEnterKey:false
       });
       this.clearResult();
       return false;
@@ -199,7 +201,8 @@ export class GamePageComponent implements OnInit {
         title: "В ответе используй только цифры!",
         confirmButtonColor: "#4F7A8C",
         icon: 'warning',
-        confirmButtonText: 'OK'
+        confirmButtonText: 'OK',
+        allowEnterKey:false
       });
       this.clearResult();
       return false;
@@ -253,6 +256,7 @@ export class GamePageComponent implements OnInit {
     else {
       this.pointsWord = "очков."
     }
+    this.focusOnElement("newTask");
   }
 
   clearResult() {
@@ -260,8 +264,7 @@ export class GamePageComponent implements OnInit {
   }
 
   placeAnswer() {
-    var input = document.getElementById('inputAnswer');
-    input.focus();
+    this.focusOnElement("inputAnswer");
     var temp = {};
     switch (this.taskToDo.length) {
       case 7:
@@ -322,5 +325,9 @@ export class GamePageComponent implements OnInit {
   }
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  focusOnElement(elementName:string) {
+    var input = document.getElementById(elementName);
+    input.focus();
   }
 }
