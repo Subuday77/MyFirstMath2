@@ -114,3 +114,13 @@ td {
     font-size: 80px;
     -webkit-text-stroke: 1px rgb(0, 0, 0);
 }
+
+.point {
+    position: absolute;
+    font-size: 80px;
+    font-family: 'Rubik Moonrocks';
+    color: yellow;
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    top: 420px;
+    left: 400px;
+}

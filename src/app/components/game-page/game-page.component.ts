@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Action } from 'src/app/models/action';
 import { ServiceService } from 'src/app/service.service';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+
 
 
 @Component({
@@ -34,6 +35,9 @@ export class GamePageComponent implements OnInit {
   isAnswerCorrect: number = -1;
   upToStar: number = 20;
   starsArray = [];
+  point: string;
+  isShowPoint1: boolean;
+  isShowPoint2: boolean;
 
 
   ngOnInit(): void {
@@ -217,12 +221,15 @@ export class GamePageComponent implements OnInit {
           }
           this.upToStar = this.upToStar === this.answersCounter ? this.upToStar * 2 : this.upToStar;
           this.isAnswerCorrect = 0;
-          this.resultAnimation(action.bonus);
+          this.point = "+" + action.bonus;
+          // this.resultAnimation(action.bonus);
         } else {
           this.points = this.points - action.fee;
           this.isAnswerCorrect = 1;
-          this.resultAnimation(-action.fee);
+          this.point = "-" + action.fee;
+          // this.resultAnimation(-action.fee);
         }
+        this.showHidePoint();
       }
     });
     var leftToStar = (this.upToStar - this.answersCounter).toString();
@@ -262,42 +269,19 @@ export class GamePageComponent implements OnInit {
     }
     return temp;
   }
-  resultAnimation(number: number) {
-    if (number > 0) {
-      Swal.fire({
-        title: `<p style="font-size:300%;color:black;text-align:center;-webkit-text-stroke: 2px rgb(255, 255, 255);">+` + number + `</p>`,
-        toast: true,
-        showConfirmButton: false,
-        width: 250,
-        timer: 1500,
-        background: 'green',
-        showClass: {
-          popup: 'animate__animated animate__fadeInUp'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOut'
-        }
-      });
-    } else {
-      Swal.fire({
-        title: `<p style="font-size:300%;color:black;text-align:center;-webkit-text-stroke: 2px rgb(255, 255, 255);">` + number + `</p>`,
-        toast: true,
-        showConfirmButton: false,
-        width: 250,
-        timer: 1000,
-        background: 'red',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOut'
-        }
-      });
-    }
+  async showHidePoint() {
+    this.isShowPoint1 = true;
+    await this.delay(1000);
+    this.isShowPoint1 = false;
+    this.isShowPoint2 = true;
+    await this.delay(1000);
+    this.isShowPoint2 = false;
   }
+
   answerBackground() {
     return this.isAnswerCorrect === 0 ? { 'background-color': 'green' } : this.isAnswerCorrect === 1 ? { 'background-color': 'red' } : {};
   }
+  
   out() {
     Swal.fire({
       title: 'Уверен?',

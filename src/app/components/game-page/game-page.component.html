@@ -13,6 +13,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="@sweetalert2/theme-borderless/borderless.css">
+    <script src="sweetalert2/dist/sweetalert2.min.js"></script> -->
 </head>
 
 <body>
@@ -59,6 +61,10 @@
     <h1>Ты набрал {{points}} {{pointsWord}}</h1>
     <h1>Правильных ответов: {{answersCounter}} из {{commonCounter}}</h1>
     <h1>Дай {{upToStar - answersCounter}} правильны{{answersWord}} и получи звезду!</h1>
+    <h1 *ngIf="isShowPoint1 && !isAnswerCorrect" class="point animate__animated animate__fadeInUp">{{point}}</h1>
+    <h1 *ngIf="isShowPoint2 && !isAnswerCorrect" class="point animate__animated animate__fadeOut">{{point}}</h1>
+    <h1 *ngIf="isShowPoint1 && isAnswerCorrect" class="point animate__animated animate__fadeInDown">{{point}}</h1>
+    <h1 *ngIf="isShowPoint2 && isAnswerCorrect" class="point animate__animated animate__fadeOut">{{point}}</h1>
     <div style="position: absolute; top:205px; left:500px; width: 350px">
         <h1 style="font-size: 400%;" class="animate__animated animate__fadeInDown" *ngIf="!isAnswerGiven">{{taskToDo}}</h1>
         <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" class="animate__animated animate__shakeX" *ngIf="isAnswerGiven && isAnswerCorrect">{{taskToDo}} {{correctResult}}</h1>
@@ -71,15 +77,4 @@
         <button *ngIf="taskToDo.length && !isAnswerGiven" class="back" (click)="generateTask()">Новое задание <a style = "font-size: 50%;">(-2 очка)</a></button>
         <button *ngIf="taskToDo.length && !isAnswerGiven" class="back answer" style="left: 370px; width: 150px;" (click)="checkAnswer()">Ответ</button>
     </div>
-    <!-- <div>
-        <table style="width: fit-content;">
-            <tbody>
-                <tr>
-                    <td *ngFor="let star of starsArray" style="background-color: unset; width: 0px; text-align: left;"><span class="animate__animated animate__backInDown unselectable material-icons-round yellow">
-                        star
-                        </span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
 </body>
