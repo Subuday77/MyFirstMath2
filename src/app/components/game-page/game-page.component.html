@@ -65,7 +65,7 @@
     <h1 *ngIf="isShowPoint2 && !isAnswerCorrect" class="point animate__animated animate__fadeOut">{{point}}</h1>
     <h1 *ngIf="isShowPoint1 && isAnswerCorrect" class="point animate__animated animate__fadeInDown">{{point}}</h1>
     <h1 *ngIf="isShowPoint2 && isAnswerCorrect" class="point animate__animated animate__fadeOut">{{point}}</h1>
-    <div style="position: absolute; top:205px; left:500px; width: 350px">
+    <div style="position: absolute; top:205px; left:500px; width: 370px">
         <h1 style="font-size: 400%;" class="animate__animated animate__fadeInDown" *ngIf="!isAnswerGiven">{{taskToDo}}</h1>
         <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" class="animate__animated animate__shakeX" *ngIf="isAnswerGiven && isAnswerCorrect">{{taskToDo}} {{correctResult}}</h1>
         <h1 [ngStyle]="answerBackground()" style="font-size: 400%;" class="animate__animated animate__flipInX" *ngIf="isAnswerGiven && !isAnswerCorrect">{{taskToDo}} {{correctResult}}</h1>
@@ -77,6 +77,6 @@
         <button *ngIf="!taskToDo.length" class="back" (click)="generateTask()">Показать задание</button>
         <button *ngIf="taskToDo.length" class="back" id="newTask" (click)="generateTask()">Новое задание</button>
         <button *ngIf="taskToDo.length && !isAnswerGiven" class="back" (click)="generateTask()">Новое задание <a style = "font-size: 50%;">(-2 очка)</a></button>
-        <button *ngIf="taskToDo.length && !isAnswerGiven" class="back answer" style="left: 370px; width: 150px;" (click)="checkAnswer()">Ответ</button>
+        <button *ngIf="taskToDo.length && !isAnswerGiven" class="back answer" style="left: 390px; width: 150px;" (click)="checkAnswer()">Ответ</button>
     </div>
 </body>
