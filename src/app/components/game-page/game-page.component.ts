@@ -38,6 +38,7 @@ export class GamePageComponent implements OnInit {
   point: string;
   isShowPoint1: boolean;
   isShowPoint2: boolean;
+  flag: boolean = false;
 
 
   ngOnInit(): void {
@@ -108,7 +109,13 @@ export class GamePageComponent implements OnInit {
       });
       return false;
     }
-    this.points = this.isAnswerGiven || this.taskToDo === "" ? this.points : this.points - 2;
+    if (!this.isAnswerGiven && this.taskToDo != "") {
+      this.point = "-2";
+      this.showHidePoint();
+      this.points = this.points + eval(this.point);
+      this.pointsWords();
+      this.flag = false;
+    }
     var actualActions = [];
     this.result = "";
     this.isAnswerGiven = false;
@@ -174,13 +181,14 @@ export class GamePageComponent implements OnInit {
     }
   }
   checkAnswer() {
+    this.flag = true;
     if (this.result.length === 0) {
       Swal.fire({
         title: "Пожалуйста, дай ответ!",
         confirmButtonColor: "#4F7A8C",
         icon: 'warning',
         confirmButtonText: 'OK',
-        allowEnterKey:false
+        allowEnterKey: false
       });
       this.clearResult();
       return false;
@@ -191,7 +199,7 @@ export class GamePageComponent implements OnInit {
         confirmButtonColor: "#4F7A8C",
         icon: 'warning',
         confirmButtonText: 'OK',
-        allowEnterKey:false
+        allowEnterKey: false
       });
       this.clearResult();
       return false;
@@ -202,7 +210,7 @@ export class GamePageComponent implements OnInit {
         confirmButtonColor: "#4F7A8C",
         icon: 'warning',
         confirmButtonText: 'OK',
-        allowEnterKey:false
+        allowEnterKey: false
       });
       this.clearResult();
       return false;
@@ -225,12 +233,10 @@ export class GamePageComponent implements OnInit {
           this.upToStar = this.upToStar === this.answersCounter ? this.upToStar * 2 : this.upToStar;
           this.isAnswerCorrect = 0;
           this.point = "+" + action.bonus;
-          // this.resultAnimation(action.bonus);
         } else {
           this.points = this.points - action.fee;
           this.isAnswerCorrect = 1;
           this.point = "-" + action.fee;
-          // this.resultAnimation(-action.fee);
         }
         this.showHidePoint();
       }
@@ -246,6 +252,14 @@ export class GamePageComponent implements OnInit {
     }
     this.commonCounter++;
     this.isAnswerGiven = true;
+    this.pointsWords();
+    this.focusOnElement("newTask");
+  }
+  clearResult() {
+    this.result = "";
+  }
+
+  pointsWords() {
     var pointsQuantity = this.points.toString();
     if (pointsQuantity.endsWith("1") && !pointsQuantity.endsWith("11")) {
       this.pointsWord = "очко."
@@ -256,15 +270,14 @@ export class GamePageComponent implements OnInit {
     else {
       this.pointsWord = "очков."
     }
-    this.focusOnElement("newTask");
-  }
-
-  clearResult() {
-    this.result = "";
   }
 
   placeAnswer() {
     this.focusOnElement("inputAnswer");
+    if (this.flag) {
+      this.isShowPoint1 = false;
+      this.isShowPoint2 = false;
+    }
     var temp = {};
     switch (this.taskToDo.length) {
       case 7:
@@ -287,6 +300,8 @@ export class GamePageComponent implements OnInit {
     }
     return temp;
   }
+
+
   async showHidePoint() {
     this.isShowPoint1 = true;
     await this.delay(1000);
@@ -326,7 +341,7 @@ export class GamePageComponent implements OnInit {
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  focusOnElement(elementName:string) {
+  focusOnElement(elementName: string) {
     var input = document.getElementById(elementName);
     input.focus();
   }
